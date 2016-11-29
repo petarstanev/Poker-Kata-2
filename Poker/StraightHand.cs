@@ -12,8 +12,31 @@ namespace Poker
     using System.Collections.Generic;
 
     /// <summary>The pair hand.</summary>
-    public class StraightHand
+    public class StraightHand : Hand
     {
+        public StraightHand(IEnumerable<Card> cards)
+            : base(cards, 13)
+        {
+        }
+        public override int CompareTo(Hand other)
+        {
+            int result = base.CompareTo(other);
 
+            if (result == 0)
+            {
+                result = this.ComparePairs(new List<Card>(this.Cards), new List<Card>(other.Cards));
+            }
+
+            return result;
+        }
+
+        protected int ComparePairs(List<Card> player1Cards, List<Card> player2Cards)
+        {
+            int result = 0;
+
+            result = this.CompareHighestCards(player1Cards, player2Cards);
+
+            return result;
+        }
     }
 }

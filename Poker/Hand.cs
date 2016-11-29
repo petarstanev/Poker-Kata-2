@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Dynamic;
+
 namespace Poker
 {
     using System;
@@ -52,6 +54,21 @@ namespace Poker
         {
             int result = 0;
 
+            var query = player1Cards.Where(c => player1Cards.Count(x => x.Value == c.Value) == 3);
+            var query2 = player1Cards.Where(c => player1Cards.Count(x => x.Value == c.Value) == 2);
+            if (query.Count() == 3 && query2.Count() == 2)
+            {
+                result = ComparePair(player1Cards, player2Cards, 3);
+                if (result != 0) return result;
+            }
+
+            if (player1Cards.Select(x => x.Value).Distinct().Count() <= 4)
+            {
+                result = ComparePair(player1Cards, player2Cards, 2);
+                if (result != 0) return result;
+            }
+
+
             int max = player1Cards.Count - 1;
             for (int i = max; i >= 0; i--)
             {
@@ -69,6 +86,76 @@ namespace Poker
             }
 
             return result;
+        }
+
+        protected int ComparePair(List<Card> player1Cards, List<Card> player2Cards, int numberOfCards)
+        {
+            int result = 0;
+            int player1PairValue;
+            int player2PairValue;
+            if (numberOfCards == 2)
+            {
+                player1PairValue = GetPairValue(player1Cards);
+                player2PairValue = GetPairValue(player2Cards);
+            }
+            else
+            {
+                player1PairValue = Get3CardValue(player1Cards);
+                player2PairValue = Get3CardValue(player2Cards);
+            }
+
+
+            if (player1PairValue < player2PairValue)
+            {
+                result = -1;
+            }
+            else if (player1PairValue > player2PairValue)
+            {
+                result = 1;
+            }
+
+            return result;
+        }
+
+        private int Get3CardValue(List<Card> playerCards)
+        {
+            int value = 0;
+            for (int i = 0; i < playerCards.Count; i++)
+            {
+                for (int x = 0; x < playerCards.Count; x++)
+                {
+                    for (int y = 0; y < playerCards.Count; y++)
+                    {
+
+                        if (playerCards[x].Value == playerCards[i].Value && playerCards[i].Value == playerCards[y].Value && i != x && i != y && x!=y)
+                        {
+                            if (value < playerCards[x].Value)
+                            {
+                                value = playerCards[x].Value;
+                            }
+                        }
+                    }
+                }
+            }
+            return value;
+        }
+        private int GetPairValue(List<Card> playerCards)
+        {
+            int value = 0;
+            for (int i = 0; i < playerCards.Count; i++)
+            {
+                for (int x = 0; x < playerCards.Count; x++)
+                {
+                    if (playerCards[x].Value == playerCards[i].Value && i != x)
+                    {
+                        if (value < playerCards[x].Value)
+                        {
+                            value = playerCards[x].Value;
+                        }
+                    }
+                }
+            }
+            return value;
         }
     }
 }

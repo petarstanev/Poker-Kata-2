@@ -53,7 +53,7 @@ namespace Poker
         {
             int result = 0;
 
-            //TODO: complete me
+            result = this.CompareHighestCards(player1Cards, player2Cards);
 
             return result;
         }

@@ -37,7 +37,7 @@ namespace Poker
 
             if (IsStraight(cards))
             {
-                return IsFlush(cards) ? new StraightFlushHand(cards) : new StraightHand(cards);
+                return IsFlush(cards) ? (Hand) new StraightFlushHand(cards) : new StraightHand(cards);
             }
 
             if (IsFlush(cards))
