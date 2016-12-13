@@ -62,6 +62,14 @@ namespace Poker
                 if (result != 0) return result;
             }
 
+            int a = player1Cards.Select(x => x.Value).Distinct().Count();
+
+            if (player1Cards.Select(x => x.Value).Distinct().Count() <= 3)
+            {
+                result = ComparePair(player1Cards, player2Cards, 4);
+                if (result != 0) return result;
+            }
+
             if (player1Cards.Select(x => x.Value).Distinct().Count() <= 4)
             {
                 result = ComparePair(player1Cards, player2Cards, 2);
@@ -97,6 +105,10 @@ namespace Poker
             {
                 player1PairValue = GetPairValue(player1Cards);
                 player2PairValue = GetPairValue(player2Cards);
+            } else if (numberOfCards == 4)//2 pairs
+            {
+                player1PairValue = Get2PairsValue(player1Cards);
+                player2PairValue = Get2PairsValue(player2Cards);
             }
             else
             {
@@ -156,6 +168,31 @@ namespace Poker
                 }
             }
             return value;
+        }
+
+        private int Get2PairsValue(List<Card> playerCards)
+        {
+            int pair1Value = 0;
+            int pair2Value = 0;
+
+            for (int i = 0; i < playerCards.Count; i++)
+            {
+                for (int x = 0; x < playerCards.Count; x++)
+                {
+                    if (playerCards[x].Value == playerCards[i].Value && i != x)
+                    {
+                            if (pair1Value > 0)
+                            {
+                                pair2Value = playerCards[x].Value;
+                            }
+                            else
+                            {
+                                pair1Value = playerCards[x].Value;
+                            }
+                    }
+                }
+            }
+            return pair1Value + pair2Value;
         }
     }
 }

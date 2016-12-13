@@ -1,8 +1,8 @@
-C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\obj\Debug\Poker.Test.csprojResolveAssemblyReference.cache
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\bin\Debug\Poker.Test.dll
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\bin\Debug\Poker.Test.pdb
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\bin\Debug\Poker.exe
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\bin\Debug\Poker.pdb
+C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\obj\Debug\Poker.Test.csprojResolveAssemblyReference.cache
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\obj\Debug\Poker.Test.dll
 C:\Users\Petar Stanev\Downloads\Kata_Part2\Poker.Test\obj\Debug\Poker.Test.pdb
