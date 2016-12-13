@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Dynamic;
-
 namespace Poker
 {
     using System;
@@ -23,8 +21,8 @@ namespace Poker
         /// <param name="rank">The rank.</param>
         protected Hand(IEnumerable<Card> cards, int rank)
         {
-            this.Cards = cards.ToList();
-            this.Rank = rank;
+            Cards = cards.ToList();
+            Rank = rank;
         }
 
         /// <summary>Gets or sets the cards.</summary>
@@ -38,12 +36,12 @@ namespace Poker
         /// <returns>The <see cref="int"/>.</returns>
         public virtual int CompareTo(Hand other)
         {
-            if (this.Rank == other.Rank)
+            if (Rank == other.Rank)
             {
                 return 0;
             }
 
-            return this.Rank < other.Rank ? -1 : 1;
+            return Rank < other.Rank ? -1 : 1;
         }
 
         /// <summary>The find player with highest non special card.</summary>
@@ -61,10 +59,8 @@ namespace Poker
                 result = ComparePair(player1Cards, player2Cards, 3);
                 if (result != 0) return result;
             }
-
-            int a = player1Cards.Select(x => x.Value).Distinct().Count();
-
-            if (player1Cards.Select(x => x.Value).Distinct().Count() <= 3)
+            
+            if (player1Cards.Select(x => x.Value).Distinct().Count() <= 3) //2 pairs
             {
                 result = ComparePair(player1Cards, player2Cards, 4);
                 if (result != 0) return result;
@@ -105,7 +101,8 @@ namespace Poker
             {
                 player1PairValue = GetPairValue(player1Cards);
                 player2PairValue = GetPairValue(player2Cards);
-            } else if (numberOfCards == 4)//2 pairs
+            }
+            else if (numberOfCards == 4)//2 pairs
             {
                 player1PairValue = Get2PairsValue(player1Cards);
                 player2PairValue = Get2PairsValue(player2Cards);
@@ -139,7 +136,7 @@ namespace Poker
                     for (int y = 0; y < playerCards.Count; y++)
                     {
 
-                        if (playerCards[x].Value == playerCards[i].Value && playerCards[i].Value == playerCards[y].Value && i != x && i != y && x!=y)
+                        if (playerCards[x].Value == playerCards[i].Value && playerCards[i].Value == playerCards[y].Value && i != x && i != y && x != y)
                         {
                             if (value < playerCards[x].Value)
                             {
@@ -160,10 +157,7 @@ namespace Poker
                 {
                     if (playerCards[x].Value == playerCards[i].Value && i != x)
                     {
-                        if (value < playerCards[x].Value)
-                        {
-                            value = playerCards[x].Value;
-                        }
+                        value = playerCards[x].Value;
                     }
                 }
             }
@@ -181,14 +175,14 @@ namespace Poker
                 {
                     if (playerCards[x].Value == playerCards[i].Value && i != x)
                     {
-                            if (pair1Value > 0)
-                            {
-                                pair2Value = playerCards[x].Value;
-                            }
-                            else
-                            {
-                                pair1Value = playerCards[x].Value;
-                            }
+                        if (pair1Value > 0)
+                        {
+                            pair2Value = playerCards[x].Value;
+                        }
+                        else
+                        {
+                            pair1Value = playerCards[x].Value;
+                        }
                     }
                 }
             }
